@@ -4,7 +4,7 @@ import { test } from "@playwright/test";
 //const LoginPage = require("/pages/LoginPage");
 const LoginPage = require('../pages/LoginPage');
 const DiscountApplyPage = require("../pages/DiscountApplyPage");
-//const PersonalDetailsPage = require("../pages/PersonalDetailsPage");
+const PersonalDetailsPage = require("../pages/PersonalDetailsPage");
 //const EventCriteriaPage = require("../pages/EventCriteriaPage");
 //const CharityDetailsPage = require("../pages/CharityDetailsPage");
 //const MerchandiseDetailsPage = require("../pages/MerchandiseDetailsPage");
@@ -19,11 +19,11 @@ test("Procam Registration Login Page Test", async ({ page }) => {
   await loginPage.verifyLogo();
   await loginPage.verifyLogin();
 
-  // const discountApplyPage = new DiscountApplyPage(page);
-  // await discountApplyPage.registrationCode();
+  const discountApplyPage = new DiscountApplyPage(page);
+  await discountApplyPage.applyDiscountCode();
 
-  // const personalDetailsPage = new PersonalDetailsPage(page);
-  // await personalDetailsPage.enterPersonalDetails();
+  const personalDetailsPage = new PersonalDetailsPage(page);
+  await personalDetailsPage.enterPersonalDetails();
 
   // const eventCriteriaPage = new EventCriteriaPage(page);
   // await eventCriteriaPage.selectingEvent();
