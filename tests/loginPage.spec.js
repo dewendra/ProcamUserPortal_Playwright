@@ -3,7 +3,7 @@ import { test } from "@playwright/test";
 
 //const LoginPage = require("/pages/LoginPage");
 const LoginPage = require('../pages/LoginPage');
-//const DiscountApplyPage = require("../pages/DiscountApplyPage");
+const DiscountApplyPage = require("../pages/DiscountApplyPage");
 //const PersonalDetailsPage = require("../pages/PersonalDetailsPage");
 //const EventCriteriaPage = require("../pages/EventCriteriaPage");
 //const CharityDetailsPage = require("../pages/CharityDetailsPage");

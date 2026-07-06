@@ -8,6 +8,8 @@ class LoginPage {
         this.eventLogo = page.locator('//img[contains(@src,"vdhm-2025")]');
         this.emailId = page.locator('//input[@id="emailId"]');
         this.send_OTP_btn = page.locator('//button[contains(normalize-space(),"Send OTP")]');
+        this.otp = page.locator('#otp');
+        this.login_btn = page.locator('//button[normalize-space()="Login"]');
     }
 
     async goto() {
@@ -23,8 +25,11 @@ class LoginPage {
     }
 
     async verifyLogin() {
-        await this.emailId.fill("vdhm26-105@yopmail.com")
-        await this.page.send_OTP_btn.click()
+        await this.emailId.fill("vdhm26-105@yopmail.com");
+        await this.send_OTP_btn.click();
+        await this.otp.fill("0");
+        await this.login_btn.click()
+
 
     }
 }
