@@ -8,6 +8,7 @@ class PersonalDetailsPage {
         this.mobile_no = page.locator('input[name="mobile"]');
         this.gender_male = page.locator('#genderMale');
         this.gender_female = page.locator('#genderFemale');
+        this.calander = page.locator('app-date-picker').getByRole('img');
         this.dob = page.locator('//input[contains(@class,"calendar-input")]');
         this.month = page.locator('//select[contains(@class,"monthpicker")]');
         this.year = page.locator('//select[contains(@class,"yearpicker")]');
@@ -28,13 +29,70 @@ class PersonalDetailsPage {
         await this.mobile_no.fill("9876543210");
         await this.gender_male.check();
 
-        //await this.dob.click();
+        // Open the calendar
+        await this.page.locator('input.calendar-input').click();
+
+        // Select Year
+        await this.page.locator('select').nth(1).selectOption('2005');
+
+        // Select Month (May)
+        await this.page.locator('select').nth(0).selectOption({ label: 'May' });
+
+        // Click Day 15
+        await this.page.locator(
+            '//div[contains(@class,"normalDates") and not(contains(@class,"disabled")) and normalize-space()="15"]'
+        ).click();
+
+
+
+        //await this.calander.click();
+
         await this.pincode.click();
-        await this.pincode.pressSequentially('110024', { delay: 100 });
+        // await this.pincode.fill('110024');
+        // const defenceColony = this.page.locator('a.dropdown-item').filter({
+        //     hasText: 'Defence Colony'
+        // });
+
+        // await defenceColony.waitFor({ state: 'visible' });
+        // await defenceColony.click();
+
+
+        await this.pincode.clear();
+        await this.pincode.pressSequentially('110024', { delay: 15 });
+        // Wait for dropdown to appear
+        // Wait 3 seconds
+        await this.page.waitForTimeout(3000);
+        //await this.page.locator('ul.dropdown-menu').waitFor();
+
+        // Click Defence Colony option
+        await this.page.locator('a.dropdown-item', { hasText: 'Defence Colony' }).click();
         //await this.pincode.fill("110024");
+
         await this.address.fill("A-262, Defence Colony");
-        await this.nationality.fill("Indian");
+
+        await this.nationality.clear();
+        await this.nationality.pressSequentially('ind', { delay: 15 });
+        await this.page.waitForTimeout(3000);
+        await this.page.locator('a.dropdown-item', { hasText: 'Indian' }).click();
+
+        await this.running_club_Yes.check();
+        await this.runningGroup_name.clear();
+        await this.runningGroup_name.pressSequentially('dwar', { delay: 15 });
+        await this.page.waitForTimeout(3000);
+        await this.page.locator('a.dropdown-item', { hasText: 'Dwarka Xpress ' }).click();
+
+        //Selecting occupation
+        await this.occupation.click();
+        // Wait for the dropdown panel
+        await this.page.locator('ng-dropdown-panel').waitFor();
+        // Click Student
+        await this.page.locator(
+            '//div[@role="option"]//span[normalize-space()="Student"]'
+        ).click();
         await this.page.pause();
+        await this.proceed_btn.click();
+
+
     }
 }
 module.exports = PersonalDetailsPage;
