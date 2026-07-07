@@ -5,6 +5,8 @@ class LoginPage {
     constructor(page) {
         this.page = page;
 
+
+
         this.eventLogo = page.locator('//img[contains(@src,"vdhm-2025")]');
         this.emailId = page.locator('//input[@id="emailId"]');
         this.send_OTP_btn = page.locator('//button[contains(normalize-space(),"Send OTP")]');
