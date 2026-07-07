@@ -18,33 +18,38 @@ test("Procam Registration Login Page Test", async ({ page }) => {
   await loginPage.goto();
   await loginPage.verifyLogo();
   await loginPage.verifyLogin();
+  // await page.pause();
 
   const discountApplyPage = new DiscountApplyPage(page);
   await discountApplyPage.applyDiscountCode();
+  // await page.pause();
 
   const personalDetailsPage = new PersonalDetailsPage(page);
   await personalDetailsPage.enterPersonalDetails();
 
   // const eventCriteriaPage = new EventCriteriaPage(page);
   // await eventCriteriaPage.selectingEvent();
-  // //await page.pause();
+  // await page.pause();
 
   // const charityDetailsPage = new CharityDetailsPage(page);
   // await charityDetailsPage.EnterCharityDetails();
-
   // await page.pause();
 
   // const merchandiseDetailsPage = new MerchandiseDetailsPage(page);
   // await merchandiseDetailsPage.EnterMerchandiseDetails();
+  // await page.pause();
 
   // const orderSummaryPage = new OrderSummaryPage(page);
   // await orderSummaryPage.OrderDetails();
+  // await page.pause();
 
   // const paymentsOptionPage = new PaymentsOptionPage(page);
   // await paymentsOptionPage.paymentdetails();
+  // await page.pause();
 
   // const transactionSuccessPage = new TransactionSuccessPage(page);
   // await transactionSuccessPage.transactionDetails();
+  // await page.pause();
 
-  await page.pause();
+
 });
