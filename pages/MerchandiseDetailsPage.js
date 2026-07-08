@@ -9,3 +9,4 @@ class MerchandiseDetailsPage {
 
     }
 }
+module.exports = MerchandiseDetailsPage;

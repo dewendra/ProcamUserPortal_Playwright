@@ -8,3 +8,4 @@ class OrderSummaryPage {
 
     }
 }
+module.exports = OrderSummaryPage;

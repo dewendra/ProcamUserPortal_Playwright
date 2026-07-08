@@ -10,7 +10,7 @@ const CharityDetailsPage = require("../pages/CharityDetailsPage");
 const MerchandiseDetailsPage = require("../pages/MerchandiseDetailsPage");
 const OrderSummaryPage = require("../pages/OrderSummaryPage");
 const PaymentsOptionPage = require("../pages/PaymentsOptionPage");
-//const TransactionSuccessPage = require("../pages/TransactionSuccessPage");
+const TransactionSuccessPage = require("../pages/TransactionSuccessPage");
 
 test("Procam Registration Login Page Test", async ({ page }) => {
 
