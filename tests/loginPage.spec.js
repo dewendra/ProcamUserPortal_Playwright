@@ -5,11 +5,11 @@ import { test } from "@playwright/test";
 const LoginPage = require('../pages/LoginPage');
 const DiscountApplyPage = require("../pages/DiscountApplyPage");
 const PersonalDetailsPage = require("../pages/PersonalDetailsPage");
-//const EventCriteriaPage = require("../pages/EventCriteriaPage");
-//const CharityDetailsPage = require("../pages/CharityDetailsPage");
-//const MerchandiseDetailsPage = require("../pages/MerchandiseDetailsPage");
-//const OrderSummaryPage = require("../pages/OrderSummaryPage");
-//const PaymentsOptionPage = require("../pages/PaymentsOptionPage");
+const EventCriteriaPage = require("../pages/EventCriteriaPage");
+const CharityDetailsPage = require("../pages/CharityDetailsPage");
+const MerchandiseDetailsPage = require("../pages/MerchandiseDetailsPage");
+const OrderSummaryPage = require("../pages/OrderSummaryPage");
+const PaymentsOptionPage = require("../pages/PaymentsOptionPage");
 //const TransactionSuccessPage = require("../pages/TransactionSuccessPage");
 
 test("Procam Registration Login Page Test", async ({ page }) => {
@@ -27,28 +27,28 @@ test("Procam Registration Login Page Test", async ({ page }) => {
   const personalDetailsPage = new PersonalDetailsPage(page);
   await personalDetailsPage.enterPersonalDetails();
 
-  // const eventCriteriaPage = new EventCriteriaPage(page);
-  // await eventCriteriaPage.selectingEvent();
+  const eventCriteriaPage = new EventCriteriaPage(page);
+  await eventCriteriaPage.selectingEvent();
   // await page.pause();
 
-  // const charityDetailsPage = new CharityDetailsPage(page);
-  // await charityDetailsPage.EnterCharityDetails();
+  const charityDetailsPage = new CharityDetailsPage(page);
+  await charityDetailsPage.enterCharityDetails();
   // await page.pause();
 
-  // const merchandiseDetailsPage = new MerchandiseDetailsPage(page);
-  // await merchandiseDetailsPage.EnterMerchandiseDetails();
+  const merchandiseDetailsPage = new MerchandiseDetailsPage(page);
+  await merchandiseDetailsPage.enterMerchandiseDetails();
   // await page.pause();
 
-  // const orderSummaryPage = new OrderSummaryPage(page);
-  // await orderSummaryPage.OrderDetails();
+  const orderSummaryPage = new OrderSummaryPage(page);
+  await orderSummaryPage.orderDetails();
   // await page.pause();
 
-  // const paymentsOptionPage = new PaymentsOptionPage(page);
-  // await paymentsOptionPage.paymentdetails();
+  const paymentsOptionPage = new PaymentsOptionPage(page);
+  await paymentsOptionPage.paymentdetails();
   // await page.pause();
 
-  // const transactionSuccessPage = new TransactionSuccessPage(page);
-  // await transactionSuccessPage.transactionDetails();
+  const transactionSuccessPage = new TransactionSuccessPage(page);
+  await transactionSuccessPage.transactionDetails();
   // await page.pause();
 
 

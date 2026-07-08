@@ -89,7 +89,7 @@ class PersonalDetailsPage {
         await this.page.locator(
             '//div[@role="option"]//span[normalize-space()="Student"]'
         ).click();
-        await this.page.pause();
+        //await this.page.pause();
         await this.proceed_btn.click();
 
 
