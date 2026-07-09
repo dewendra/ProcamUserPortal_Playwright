@@ -52,7 +52,7 @@ class EventCriteriaPage {
         await this.page.waitForTimeout(3000);
         //await this.page.locator('ul.dropdown-menu').waitFor();
 
-        // Click Defence Colony option
+        // Clicking VEDANTA DELHI HALF MARATHON option
         await this.page.locator('a.dropdown-item', { hasText: 'VEDANTA DELHI HALF MARATHON' }).click();
 
         await this.timmed_Race_Category.click();
@@ -68,6 +68,7 @@ class EventCriteriaPage {
                 break;
             }
         }
+        //Entering Bib number
         await this.bibNumber.fill("2003401")
 
         // Open the calendar
@@ -84,10 +85,12 @@ class EventCriteriaPage {
             '//div[contains(@class,"normalDates") and not(contains(@class,"disabled")) and normalize-space()="20"]'
         ).click();
 
+        // Entering timing details
         await this.hours_input.fill("5");
         await this.minutes_input.fill("38");
         await this.seconds_input.fill("13");
 
+        //Entering Additional Details
 
 
 
