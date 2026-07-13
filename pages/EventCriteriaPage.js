@@ -47,8 +47,8 @@ class EventCriteriaPage {
 
         await this.search_Event.clear();
         await this.search_Event.pressSequentially('ved', { delay: 15 });
-        // Wait for dropdown to appear
-        // Wait 3 seconds
+
+        // Wait 3 seconds for dropdown to appear
         await this.page.waitForTimeout(3000);
         //await this.page.locator('ul.dropdown-menu').waitFor();
 
@@ -91,10 +91,43 @@ class EventCriteriaPage {
         await this.seconds_input.fill("13");
 
         //Entering Additional Details
+        //Selecting id proof type 
+        const idProofdropDown = this.page.locator("//label[contains(normalize-space(),\"Applicant's ID Proof Type\")] /ancestor::app-id-type-select-comp //ng-select")
+        await idProofdropDown.click();
+        const idProofOptions = this.page.locator('ng-dropdown-panel .ng-option-label');
+        const totalidProofOption = idProofOptions.count();
+        // Collect all option texts
+        const options = await idProofOptions.allTextContents();
+        console.log("Available ID Proof Options:");
+        console.log(options);
+        const optionToSelect = "Pan";
+        for (let i = 0; i < options.length; i++) {
+            const text = options[i].trim();
+            console.log(text)
+            if (text === optionToSelect) {
+                await idProofOptions.nth(i).click();
+                console.log(`${optionToSelect} selected.`);
+                break;
+            }
+        }
+
+        //Entering IdProof Number
+        await this.enterIdProofNumber("Pan", "ABCDE1234F");
+
+        //await this.enterIdProofNumber("Passport", "M1234567");
+        //await this.enterIdProofNumber("Driving License", "DL0420110012345");
+
+        //Uploading IdProof Documnets
+        const uploadIdProof = this.page.locator('//input[@name="file"]');
+        await uploadIdProof.setInputFiles("C://Users//dewen//Downloads//Procam_Testing//Avatar_Images//PAN.jpg");
+
+        //Uploading profile Image
+        const uploadprofileImage = this.page.locator('//input[@id="profileUploadLink"]');
+        await uploadprofileImage.setInputFiles("C://Users//dewen//Downloads//Procam_Testing//Avatar_Images//John Five.jpg");
 
 
 
-
+        //Entering Emergency Details
         await this.emergencyName1.fill("Mohan Lal");
         await this.emergencyNumber1.fill("9876543215");
         await this.emergencyrelationShip1.fill("Friend");
@@ -102,12 +135,13 @@ class EventCriteriaPage {
         await this.emergencyNumber2.fill("9876543216");
         await this.emergencyrelationShip2.fill("Brother");
 
-        const tshirtSection = page.locator(
+        const tshirtSection = this.page.locator(
             'div:has(label:text("T-Shirt Size"))'
         );
 
+        //Entering Tshirt Details
         await tshirtSection.getByRole('combobox').click();
-        await page.getByRole('option', { name: 'M' }).click();
+        await this.page.getByRole('option', { name: 'M' }).click();
 
         await this.page
             .locator('div:has(label:text("Where did you hear about our event?"))')
@@ -124,6 +158,21 @@ class EventCriteriaPage {
 
         await this.page.pause();
 
+    }
+    async enterIdProofNumber(idType, idNumber) {
+        const inputNames = {
+            "Pan": "pan",
+            "Passport": "passport",
+            "Driving licence": "drivingLicense",
+            "Driving License": "drivingLicense",
+            "Aadhar": "aadhar"
+        };
+
+        const input = this.page.locator(`input[name="${inputNames[idType]}"]`);
+
+        await input.waitFor({ state: "visible" });
+        await input.fill(idNumber);
+        console.log(`${idNumber} selected`)
     }
 }
 module.exports = EventCriteriaPage;
