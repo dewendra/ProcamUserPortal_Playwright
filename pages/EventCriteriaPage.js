@@ -120,11 +120,19 @@ class EventCriteriaPage {
         //Uploading IdProof Documnets
         const uploadIdProof = this.page.locator('//input[@name="file"]');
         await uploadIdProof.setInputFiles("C://Users//dewen//Downloads//Procam_Testing//Avatar_Images//PAN.jpg");
-
+        await this.page.waitForResponse(
+            response =>
+                response.url().includes('upload') &&
+                response.status() === 200
+        );
         //Uploading profile Image
         const uploadprofileImage = this.page.locator('//input[@id="profileUploadLink"]');
         await uploadprofileImage.setInputFiles("C://Users//dewen//Downloads//Procam_Testing//Avatar_Images//John Five.jpg");
-
+        await this.page.waitForResponse(
+            response =>
+                response.url().includes('upload') &&
+                response.status() === 200
+        );
 
 
         //Entering Emergency Details
@@ -135,13 +143,27 @@ class EventCriteriaPage {
         await this.emergencyNumber2.fill("9876543216");
         await this.emergencyrelationShip2.fill("Brother");
 
-        const tshirtSection = this.page.locator(
-            'div:has(label:text("T-Shirt Size"))'
-        );
+        const tshirtSection = this.page.locator('//label[normalize-space()="T-Shirt Size"]/following::ng-select[1]');
 
         //Entering Tshirt Details
-        await tshirtSection.getByRole('combobox').click();
-        await this.page.getByRole('option', { name: 'M' }).click();
+        await tshirtSection.click();
+        const tshirtSizes = this.page.locator('ng-dropdown-panel .ng-option-label');
+        const totaltshirtSizes = tshirtSizes.count();
+        // Collect all option texts
+        const options = await tshirtSizes.allTextContents();
+        console.log("Available ID Proof Options:");
+        console.log(options);
+        const optionToSelect = "M";
+        for (let i = 0; i < options.length; i++) {
+            const text = options[i].trim();
+            console.log(text)
+            if (text === optionToSelect) {
+                await tshirtSizes.nth(i).click();
+                console.log(`${optionToSelect} selected.`);
+                break;
+            }
+        }
+        // await this.page.getByRole('option', { name: 'M' }).click();
 
         await this.page
             .locator('div:has(label:text("Where did you hear about our event?"))')
@@ -149,13 +171,6 @@ class EventCriteriaPage {
             .click();
 
         await this.page.getByRole('option', { name: 'Online' }).click();
-
-
-
-
-
-
-
         await this.page.pause();
 
     }
